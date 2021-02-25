@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Board } from "./classes/Board";
+import { SpotColor } from "./classes/Spot";
 
 function App() {
+  const board = new Board();
+  board.resetBoard();
+
+  console.log(board);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {board.boxes.map(row => (
+        <div className="row">
+          {row.map(box => (
+            <div
+              className="box"
+              style={{
+                background: box.color === SpotColor.Black ? "black" : "white"
+              }}
+            >
+              {box.piece && <div>piece</div>}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
